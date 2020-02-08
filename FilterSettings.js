@@ -75,4 +75,4 @@ const FilterSettings = {
 
 export {
 	FilterSettings
-};
+}; 
