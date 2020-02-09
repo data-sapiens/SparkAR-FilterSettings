@@ -58,7 +58,7 @@ FilterSettings.configure({
 	}
 }, onUpdate);
 
-// Function that adjust colors
+// Function that is triggered when settings are updated.
 function onUpdate(evt) {
 	Patches.setScalarValue('contrast', FilterSettings.contrast);
 	Patches.setScalarValue('lightness', FilterSettings.lightness);
