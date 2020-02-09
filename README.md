@@ -36,6 +36,7 @@ Here is an quick example on how one can send the values to the pathch editor and
 // SparkAR Modules
 //
 const Patches = require('Patches');
+const Tex = require('Textures');
 
 //
 // Local Dependencies
