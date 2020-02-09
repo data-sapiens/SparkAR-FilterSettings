@@ -75,6 +75,8 @@ And then set up the patch in the pacth editor:
 
 You can follow the [SparkAR guide on script to patches bridging](https://sparkar.facebook.com/ar-studio/learn/documentation/docs/visual-programming/javascript-to-patch-bridging/) to see how to set up the bridges.
 
+The project for this example can be [downloaded here.](https://github.com/data-sapiens/SparkAR-FilterSettings/raw/master/SampleProjectUsingPatches.zip)
+
 ## Example using script (custom color adjustment shader)
 Under is a quick example how it can be used to adjust colors on a filter. Note that this example wont work out of the box, but is to make it more clear. 
 ```
