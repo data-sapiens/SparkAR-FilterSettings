@@ -69,8 +69,10 @@ function onUpdate(evt) {
 // into the patch editor.
 onUpdate();
 ```
-And then set up the patch in the pacth editor: 
+And then set up the patch in the pacth editor:
 ![Nodes in patch editor](https://user-images.githubusercontent.com/2833312/74100183-6bf3b780-4b2c-11ea-9880-91c8c90f8987.png)
+
+You can follow the [SparkAR guide on script to patches bridging](https://sparkar.facebook.com/ar-studio/learn/documentation/docs/visual-programming/javascript-to-patch-bridging/) to see how to set up the bridges.
 
 ## Example using script (custom color adjustment shader)
 Under is a quick example how it can be used to adjust colors on a filter. Note that this example wont work out of the box, but is to make it more clear. 
