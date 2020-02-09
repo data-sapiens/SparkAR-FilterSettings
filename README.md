@@ -29,7 +29,50 @@ function callback(evt) {
 ```
 By default all settings will have the value 0, but you can overwrite this by setting a `default` parameter for the setting (As shown on setting2 above). You also will need to provide a callback function that should trigger when any of the settings are updated. The callack will recieve an object with the name of the setting being updated and its new value.
 
-## Example
+## Example using patches (Updating SparkAR's Adjust Color Shader Patch)
+Here is an quick example on how one can send the values to the pathch editor and use them in the Adjust Color Shader Patch.
+```
+//
+// SparkAR Modules
+//
+const Patches = require('Patches');
+
+//
+// Local Dependencies
+//
+import { FilterSettings } from './FilterSettings';
+
+//
+// Setup filter settings
+//
+FilterSettings.configure({
+	contrast: {
+		icon: Tex.get('iconContrast')
+	},
+	lightness: {
+		icon: Tex.get('iconBrightness'),
+		default: 0.5,
+	},
+	saturation: {
+		icon: Tex.get('iconSaturation'),
+	}
+}, onUpdate);
+
+// Function that adjust colors
+function onUpdate(evt) {
+	Patches.setScalarValue('contrast', FilterSettings.contrast);
+	Patches.setScalarValue('lightness', FilterSettings.lightness);
+	Patches.setScalarValue('saturation', FilterSettings.saturation);
+}
+
+// Trigger once on init to load default values
+// into the patch editor.
+onUpdate();
+```
+And then set up the patch in the pacth editor: 
+![Nodes in patch editor](https://user-images.githubusercontent.com/2833312/74100183-6bf3b780-4b2c-11ea-9880-91c8c90f8987.png)
+
+## Example using script (custom color adjustment shader)
 Under is a quick example how it can be used to adjust colors on a filter. Note that this example wont work out of the box, but is to make it more clear. 
 ```
 //
