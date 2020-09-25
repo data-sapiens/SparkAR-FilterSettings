@@ -5,21 +5,21 @@ This script lets you easily add multiple settings that can be controlled by one 
 
 ## Usage
 Simply add the `FilterSettings.js` script to your project. Include it in your main project script file: 
-```
+```js
 import { FilterSettings } from './FilterSettings';
 ```
 And configure it with the settings you want to control:
-```
+```js
 FilterSettings.configure({
 	setting1: {
-		icon: Tex.get('iconSetting1')
+		icon: Tex.findFirst('iconSetting1')
 	},
 	setting2: {
-		icon: Tex.get('iconSetting2'),
+		icon: Tex.findFirst('iconSetting2'),
 		default: 0.5,
 	},
 	setting3: {
-		icon: Tex.get('iconSetting3'),
+		icon: Tex.findFirst('iconSetting3'),
 	}
 }, callback);
 
@@ -31,7 +31,7 @@ By default all settings will have the value 0, but you can overwrite this by set
 
 ## Example using patches (Updating SparkAR's Adjust Color Shader Patch)
 Here is an quick example on how one can send the values to the pathch editor and use them in the Adjust Color Shader Patch.
-```
+```js
 //
 // SparkAR Modules
 //
@@ -48,22 +48,22 @@ import { FilterSettings } from './FilterSettings';
 //
 FilterSettings.configure({
 	contrast: {
-		icon: Tex.get('iconContrast')
+		icon: Tex.findFirst('iconContrast')
 	},
 	lightness: {
-		icon: Tex.get('iconBrightness'),
+		icon: Tex.findFirst('iconBrightness'),
 		default: 0.5,
 	},
 	saturation: {
-		icon: Tex.get('iconSaturation'),
+		icon: Tex.findFirst('iconSaturation'),
 	}
 }, onUpdate);
 
 // Function that is triggered when settings are updated.
 function onUpdate(evt) {
-	Patches.setScalarValue('contrast', FilterSettings.contrast);
-	Patches.setScalarValue('lightness', FilterSettings.lightness);
-	Patches.setScalarValue('saturation', FilterSettings.saturation);
+	Patches.input.setScalar('contrast', FilterSettings.contrast);
+	Patches.input.setScalar('lightness', FilterSettings.lightness);
+	Patches.input.setScalar('saturation', FilterSettings.saturation);
 }
 
 // Trigger once on init to load default values
@@ -79,7 +79,7 @@ The project for this example can be [downloaded here.](https://github.com/data-s
 
 ## Example using script (custom color adjustment shader)
 Under is a quick example how it can be used to adjust colors on a filter. Note that this example wont work out of the box, but is to make it more clear. 
-```
+```js
 //
 // SparkAR Modules
 //
@@ -95,26 +95,26 @@ import { adjustColors } from './Shaders';
 //
 // Get textures
 //
-const texCamera = Tex.get('texCamera');
+let texCamera = Tex.findFirst('texCamera').then(t => texCamera = t);
 
 //
 // Get materials
 //
-const matEdited = Mat.get('matEdited');
+let matEdited = Mat.findFirst('matEdited').then(m => matEdited = m);
 
 //
 // Setup filter settings
 //
 FilterSettings.configure({
 	contrast: {
-		icon: Tex.get('iconContrast')
+		icon: Tex.findFirst('iconContrast')
 	},
 	lightness: {
-		icon: Tex.get('iconBrightness'),
+		icon: Tex.findFirst('iconBrightness'),
 		default: 0.5,
 	},
 	saturation: {
-		icon: Tex.get('iconSaturation'),
+		icon: Tex.findFirst('iconSaturation'),
 	}
 }, onUpdate);
 

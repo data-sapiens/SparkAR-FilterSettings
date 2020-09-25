@@ -5,7 +5,7 @@ const FilterSettings = {
 	picker: NativeUI.picker,
 	pickerConfig: {
 		selectedIndex: 0,
-	 	items: []
+		items: []
 	},
 	keys: [],
 	callback: undefined,
@@ -14,6 +14,11 @@ const FilterSettings = {
 	configure(settings, callback) {
 		this.keys = Object.keys(settings);
 		this.callback = callback;
+		this.keys.map((key) => {
+			settings[key].icon.then((icon) => {
+				settings[key].icon = icon;
+			});
+		});
 
 		// Handle settings
 		this.keys.map(key => {
@@ -28,8 +33,8 @@ const FilterSettings = {
 				image_texture: settings[key].icon
 			});
 
-			// Set default value or fall back to 0 
-			this[key] = settings[key].default || 0; 
+			// Set default value or fall back to 0
+			this[key] = settings[key].default || 0;
 		});
 
 		// Set current being edited to be first of settings
@@ -47,7 +52,7 @@ const FilterSettings = {
 		this.picker.configure(this.pickerConfig);
 
 		// Listen to picker events
-		this.picker.selectedIndex.monitor({fireOnInitialValue: false}).subscribe(index => {
+		this.picker.selectedIndex.monitor({ fireOnInitialValue: false }).subscribe(index => {
 			// Update current setting being edited to the new picked item
 			this.current = this.keys[index.newValue];
 
@@ -56,7 +61,7 @@ const FilterSettings = {
 		});
 
 		// Subscribe to slider events
-		this.slider.value.monitor({fireOnInitialValue: false}).subscribe(val => {
+		this.slider.value.monitor({ fireOnInitialValue: false }).subscribe(val => {
 			// Update the value for the current setting beeing edited
 			this[this.current] = val.newValue;
 
@@ -75,4 +80,4 @@ const FilterSettings = {
 
 export {
 	FilterSettings
-}; 
+};
